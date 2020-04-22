@@ -4,7 +4,7 @@
 
 # 确定了词汇表后，将训练文件、测试文件等根据词汇表转化为单词编号，每个单词的编号就是它在词汇文件中的行号
 import codecs
-import sys
+import tensorflow as tf
 
 RAW_DATA = '../../data/ptb.train.txt'
 VOCAB = './ptb.vocab'  # 已生成的词汇表文件
@@ -30,3 +30,16 @@ for line in fin:
     fout.write(out_line)
 fin.close()
 fout.close()
+
+"""
+在输入层，每一个单词用一个实数向量表示，这个向量被称为‘词向量’（word embedding），也可以翻译成‘词嵌入’。
+词向量可以形象地理解为将词汇表嵌入到一个固定维度的实数空间里，这样做可以降低输入的维度，并增加语义信息。
+假设词向量的维度是EMB_SIZE，词汇表的大小为VOCAB_SIZE，那么所有单词的词向量可以放入一个大小为VOCAB_SIZE*EMB_SIZE的矩阵中。
+"""
+VOCAB_SIZE = 10000
+EMB_SIZE = 128
+input_data = OUTPUT_DATA
+# 在读取词向量时，可以调用tf.nn.embedding_lookup方法
+embedding = tf.get_variable(name='embedding', shape=[VOCAB_SIZE, EMB_SIZE])
+# 输出的矩阵会比输入数据多一个维度，新增维度的大小为EMB_SIZE
+input_embedding = tf.nn.embedding_lookup(embedding, input_data)
