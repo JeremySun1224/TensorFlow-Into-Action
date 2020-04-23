@@ -3,7 +3,7 @@
 # -*- dating: 20/4/22 -*-
 
 
-# 双层的LSTM作为循环神经网路主体并共享Embedding层和Softmax层的参数
+# 双层的LSTM作为循环神经网络主体并共享Embedding层和Softmax层的参数
 import numpy as np
 import tensorflow as tf
 import os
