@@ -23,7 +23,7 @@ sorted_word_to_cnt = sorted(counter.items(), key=itemgetter(1), reverse=True)  #
 sorted_words = [x[0] for x in sorted_word_to_cnt]
 
 # 在处理机器翻译数据时，我们还需要加入"<unk>"和句子起始符"<sos>"，并删除低频词汇，代码如下：
-sorted_words = ['<unk>', '<sos>', 'eos'] + sorted_words
+sorted_words = ['<unk>', '<sos>', '<eos>'] + sorted_words
 if len(sorted_words) > 10000:
     sorted_words = sorted_words[:10000]
 
